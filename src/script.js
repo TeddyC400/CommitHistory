@@ -153,5 +153,3 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
 }
 
 export {addContributionDay, updateContributionChart};
-
-//updateContributionChart(['Sun', 'Tue', 'Thu', 'Sat'], true);
