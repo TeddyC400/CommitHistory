@@ -45,13 +45,36 @@ oneYearAgo.setFullYear(today.getFullYear() - 1);
 oneYearAgo.setDate(oneYearAgo.getDate() - oneYearAgo.getDay());
 
 const contributionDays = new Map();
-const contributionCountColors = {
-    0: '#ebedf0',
-    1: '#c6e48b',
-    2: '#7bc96f',
-    3: '#239a3b',
-    4: '#196127'
-};
+let contributionCountColors;
+
+/**
+ * Sets custom colors for contribution count on the chart.
+ * If no colors are provided, default colors are used.
+ * Key must be a number and value must be a valid CSS color format.
+ * 
+ * Ex:
+ * const colors = {
+ *      0: '#ebedf0',
+ *      1: '#c6e48b',
+ *      2: '#7bc96f',
+ *      3: '#239a3b',
+ *      4: '#196127'
+ * }
+ * @param {*} colors Key-value pairs of contribution count and color
+ */
+function setCustomColors(colors) {
+    if (colors) {
+        contributionCountColors = colors;
+    } else {
+        contributionCountColors = {
+            0: '#ebedf0',
+            1: '#c6e48b',
+            2: '#7bc96f',
+            3: '#239a3b',
+            4: '#196127'
+        };
+    }
+}
 
 /**
  * Adds a specified amount of days to the date
@@ -104,6 +127,7 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
     setWeekdaysOnChart(hideWeekdays);
     monthsContainer.replaceChildren();
 
+    const colorsCount = Object.keys(contributionCountColors).length;
     let currentMonth = oneYearAgo.getMonth();
     let currentDate = new Date(oneYearAgo);
     let week = 0;
@@ -130,7 +154,7 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
         dayElement.className = 'contribution-day';
         dayElement.dataset.desc = description;
         dayElement.dataset.level = level;
-        dayElement.style.backgroundColor = contributionCountColors[level];
+        dayElement.style.backgroundColor = level < colorsCount ? contributionCountColors[level] : contributionCountColors[colorsCount - 1];
         dayElement.dataset.date = dateString;
         dayElement.style.gridColumnStart = week + 1;
         dayElement.style.gridRowStart = currentDate.getDay() + 1;
@@ -152,4 +176,4 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
 
 }
 
-export {addContributionDay, updateContributionChart};
+export {addContributionDay, updateContributionChart, setCustomColors};
