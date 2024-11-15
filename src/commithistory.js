@@ -17,16 +17,16 @@ class ContributionDay {
 
 const contributionContainer = document.getElementById('contribution-container');
 const monthsContainer = document.createElement('div');
-monthsContainer.setAttribute("id", "months");
+monthsContainer.setAttribute('id', 'months');
 
 const chartContainer = document.createElement('div');
-chartContainer.setAttribute("id", "chart-container");
+chartContainer.setAttribute('id', 'chart-container');
 
 const weekdaysContainer = document.createElement('div');
-weekdaysContainer.setAttribute("id", "weekdays");
+weekdaysContainer.setAttribute('id', 'weekdays');
 
 const contributionChartContainer = document.createElement('div');
-contributionChartContainer.setAttribute("id", "contribution-chart");
+contributionChartContainer.setAttribute('id', 'contribution-chart');
 
 chartContainer.appendChild(weekdaysContainer);
 chartContainer.appendChild(contributionChartContainer);
@@ -111,7 +111,7 @@ function setWeekdaysOnChart(hideWeekdays = []) {
             return;
         }
         const weekdayElement = document.createElement('div');
-        weekdayElement.classList.add("contribution-weekday");
+        weekdayElement.classList.add('contribution-weekday');
         weekdayElement.textContent = weekday;
         weekdayElement.style.gridRowStart = index + 1;
         weekdaysContainer.appendChild(weekdayElement);
@@ -163,7 +163,7 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
         // Add month label at the first day of each month
         if (currentDate.getDate() === 1 && showMonths) {
             const monthElement = document.createElement('div');
-            monthElement.classList.add("contribution-month");
+            monthElement.classList.add('contribution-month');
             monthElement.textContent = monthNames[currentDate.getMonth()];
             monthElement.style.gridColumnStart = week + 1;
             monthElement.style.gridRowStart = 1;
