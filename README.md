@@ -11,7 +11,7 @@ Insert ```id="contribution-container"``` into an HTML tag.
 
 Import the following functions from the CommitHistory script:
 ```js
-import {addContributionDay, updateContributionChart} from '/commithistory.js';
+import {addContributionDay, updateContributionChart, setCustomColors} from '/commithistory.js';
 ```
 
 After that, just call ```addContributionDay``` to add a day with the following date, description, and contribution count.
@@ -28,5 +28,20 @@ updateContributionChart(['Sun', 'Tue', 'Thu', 'Sat']); // Excludes Sunday, Tuesd
 // If you don't like including months on the top bar
 updateContributionChart([], false);
 ```
+
+Want to change the color scheme of the contribution counts?
+```js
+setCustomColors(
+    {
+        0: '#ffc0cb',
+        1: '#ffb6c1',
+        2: '#ff69b4',
+        3: '#ff1493',
+        4: '#db7093',
+    }
+);
+```
+
+Note: If the contribution count goes past the maximum value, the last key-value pair set in the list will be used for the color.
 
 That's it! To customize the style of the chart, just select specific element IDs inside the contribution chart. 
