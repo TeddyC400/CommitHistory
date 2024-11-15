@@ -11,7 +11,7 @@ Insert ```id="contribution-container"``` into an HTML tag.
 
 Import the following functions from the CommitHistory script:
 ```js
-import {addContributionDay, updateContributionChart} from '/script.js';
+import {addContributionDay, updateContributionChart} from '/commithistory.js';
 ```
 
 After that, just call ```addContributionDay``` to add a day with the following date, description, and contribution count.

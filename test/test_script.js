@@ -1,5 +1,5 @@
 
-import {addContributionDay, updateContributionChart} from '../src/script.js';
+import {addContributionDay, updateContributionChart} from '../src/commithistory.js';
 
 let todayDate = new Date();
 let date;
