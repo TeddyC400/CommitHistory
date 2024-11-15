@@ -2,7 +2,7 @@
 class ContributionDay {
 
     /**
-     * 
+     * Constructs new contribution day.
      * @param {*} date Date object
      * @param {*} description Description of the contributed day
      * @param {*} contributionCount How many contributions were made that day
@@ -122,7 +122,7 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
             description = contributionDay.description;
             level = contributionDay.contributionCount;
         } else {
-            description = "No contributions on " + currentDate.toLocaleString('default', { month: 'long' }) + " " + currentDate.getDate();
+            description = `No contributions on ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getDate()}`;
             level = 0;
         }
 
@@ -137,7 +137,7 @@ function updateContributionChart(hideWeekdays = [], showMonths = true) {
         contributionChartContainer.appendChild(dayElement);
 
         // Add month label at the first day of each month
-        if (currentDate.getDate() === 1 && showMonths === true) {
+        if (currentDate.getDate() === 1 && showMonths) {
             const monthElement = document.createElement('div');
             monthElement.classList.add("contribution-month");
             monthElement.textContent = monthNames[currentDate.getMonth()];
