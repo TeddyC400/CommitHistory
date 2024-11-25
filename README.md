@@ -4,34 +4,34 @@ CommitHistory replicates GitHub's contribution chart by being much more lightwei
 
 ## How To Use
 
-Insert ```id="contribution-container"``` into an HTML tag.
-```js
-<div id="contribution-container"></div>
+Setup a parent HTML element for the commit history chart to be inserted into:
+```html
+<div id="commit-history-container"></div>
 ```
 
-Import the following functions from the CommitHistory script:
-```js
-import {addContributionDay, updateContributionChart, setCustomColors} from '/commithistory.js';
+Import the class, reference the parent element, and initialize the object:
+```ts
+import { CommitHistory } from '/commithistory.js';
+
+const container = document.getElementById('commit-history-container');
+const commitHistory = new CommitHistory();
+commitHistory.create(container); // This will build the chart in HTML
 ```
 
-After that, just call ```addContributionDay``` to add a day with the following date, description, and contribution count.
-```js
-let today = new Date(2024, 10, 5);
-addContributionDay(date, "4 contributions on October 5", 4);
+However, just creating the chart is not enough:
+```ts
+// Add a new commit to the chart
+commitHistory.addCommit({
+    date: new Date(2024, 10, 5),
+    description: '4 new contributions on October 5th',
+    contributionCount: 4,
+});
 
-// This function will update the chart to render the contributions
-updateContributionChart();
+// Customize the contribution description when there are no commits on that particular day
+commitHistory.setEmptyDayDescription((date: Date) => `No contributions on ${date}`);
 
-// If you don't like including certain weekdays on the sidebar
-updateContributionChart(['Sun', 'Tue', 'Thu', 'Sat']); // Excludes Sunday, Tuesday, Thursday, and Satuday
-
-// If you don't like including months on the top bar
-updateContributionChart([], false);
-```
-
-Want to change the color scheme of the contribution counts?
-```js
-setCustomColors(
+// Don't like the default color schemes, call this method to change the colors
+commitHistory.setColors(
     {
         0: '#ffc0cb',
         1: '#ffb6c1',
@@ -40,8 +40,7 @@ setCustomColors(
         4: '#db7093',
     }
 );
+
+// Update the chart with new changes made
+commitHistory.updateChart();
 ```
-
-Note: If the contribution count goes past the maximum value, the last key-value pair set in the list will be used for the color.
-
-That's it! To customize the style of the chart, just select specific element IDs inside the contribution chart. 
