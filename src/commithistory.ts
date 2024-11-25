@@ -16,7 +16,6 @@ export class Commit {
 }
 
 export class CommitHistory {
-    //commitDays: CommitDay[];
     contributionDays: Map<string, Commit>;
     colors: Record<number, string>;
 
@@ -27,7 +26,6 @@ export class CommitHistory {
     private contributionChartContainer?: HTMLElement;
 
     constructor() {
-        //this.commitDays = [];
         this.contributionDays = new Map();
         this.colors = {
             0: '#ebedf0',
@@ -41,24 +39,23 @@ export class CommitHistory {
     public create(parentElement: HTMLElement) {
         this.createElements(parentElement);
         this.updateChart();
-        console.log('CommitHistory created');
     }
 
     private createElements(parentElement: HTMLElement) {
         this.commitHistory = document.createElement('div');
-        this.commitHistory.setAttribute('id', 'commit-history');
+        this.commitHistory.setAttribute('class', 'commit-history');
 
         this.monthsContainer = document.createElement('div');
-        this.monthsContainer.setAttribute('id', 'months');
+        this.monthsContainer.setAttribute('class', 'months');
 
         this.chartContainer = document.createElement('div');
-        this.chartContainer.setAttribute('id', 'chart-container');
+        this.chartContainer.setAttribute('class', 'chart-container');
 
         this.weekdaysContainer = document.createElement('div');
-        this.weekdaysContainer.setAttribute('id', 'weekdays');
+        this.weekdaysContainer.setAttribute('class', 'weekdays');
 
         this.contributionChartContainer = document.createElement('div');
-        this.contributionChartContainer.setAttribute('id', 'contribution-chart');
+        this.contributionChartContainer.setAttribute('class', 'contribution-chart');
 
         this.chartContainer.appendChild(this.weekdaysContainer);
         this.chartContainer.appendChild(this.contributionChartContainer);
