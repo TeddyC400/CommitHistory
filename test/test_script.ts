@@ -34,4 +34,5 @@ history2.setColors({
     4: '#4169e1',
     5: '#0000ff',
 });
+history2.setEmptyDayDescription((date: Date) => `No contributions on ${date}`);
 history2.updateChart();

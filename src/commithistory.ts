@@ -25,6 +25,8 @@ export class CommitHistory {
     private weekdaysContainer?: HTMLElement;
     private contributionChartContainer?: HTMLElement;
 
+    private emptyDescriptionCallback: (date: Date) => string;
+
     constructor() {
         this.contributionDays = new Map();
         this.colors = {
@@ -34,6 +36,9 @@ export class CommitHistory {
             3: '#239a3b',
             4: '#196127',
         }
+
+        // Default message for empty days
+        this.emptyDescriptionCallback = (date: Date) => `No contributions on ${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}`;
     }
 
     public create(parentElement: HTMLElement) {
@@ -120,7 +125,7 @@ export class CommitHistory {
                 description = contributionDay?.description!;
                 level = contributionDay?.contributionCount!;
             } else {
-                description = `No contributions on ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getDate()}`;
+                description = this.emptyDescriptionCallback(currentDate);
                 level = 0;
             }
 
@@ -150,11 +155,14 @@ export class CommitHistory {
     }
 
     public addCommit(commit: Commit) {
-        //this.commitDays.push(commitDay);
         this.contributionDays.set(commit.date.toISOString().split('T')[0], commit);
     }
 
     public setColors(colors: Record<number, string>) {
         this.colors = colors;
+    }
+
+    public setEmptyDayDescription(callback: (date: Date) => string) {
+        this.emptyDescriptionCallback = callback;
     }
 }
